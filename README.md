@@ -1,8 +1,16 @@
-Investigating returning two parameters as a structure
+Investigate returning two parameters as a structure
 
-Executive summary: Returning structs with two integers the
-size is faster on both if reg-struct-ret is used, which is
-the default for 64bit compiles.
+Executive summary: Returning structs with two integers is
+faster for both 32 and 64 bit compiles, if I use
+-freg-struct-ret for 32 bit compiles. That option is not
+necessary for 64 bit compiles as its the default. Also, clang
+complains that -freq-struct-ret isn't supported for 64 bit
+compiles, I should file a bug.
+
+Also, if I don't use -freq-struct-ret option than 32bit compiles are
+about 1.3x slower. Another interesting fact is gcc is faster than
+clang in this test, on other tests I've done clang tends to be
+faster.
 
 
 gcc 32bit on x86_64:
