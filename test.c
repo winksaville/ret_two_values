@@ -72,8 +72,8 @@ result_t result_ret(uint_t v) {
 int main(int argc, char* argv[]) {
   u64_t start;
   u64_t stop;  
-  u64_t loops;
-  u64_t ok;
+  u32_t loops;
+  u32_t ok;
   uint_t v;
   result_t rt;
   uint_t status;
@@ -82,9 +82,9 @@ int main(int argc, char* argv[]) {
     printf("Error expecting loops parammeter\n");
     return 1;
   }
-  loops = atoll(argv[1]);
+  loops = atol(argv[1]);
 
-  printf("warming up loops=%lld\n", loops);
+  printf("warming up loops=%d\n", loops);
   v = 0;
   ok = 0;
   status = 0;
@@ -111,14 +111,14 @@ int main(int argc, char* argv[]) {
     }
   }
   stop = rdtsc();
-  printf("status_ret ticks       = %llu = %llu - %llu status=%d v=%d ok=%lld\n",
+  printf("status_ret ticks       = %llu = %llu - %llu status=%d v=%d ok=%d\n",
       stop - start, stop, start, (int)status, (int)v, ok);
 
   rt.status = 0;
   rt.v = 0;
   ok = 0;
   start = rdtsc();
-  for (u64_t i = 0; i < loops; i++) {
+  for (u32_t i = 0; i < loops; i++) {
     rt = result_ret(rt.v);
     if (rt.status == 0) {
       ok += 1;
@@ -127,7 +127,7 @@ int main(int argc, char* argv[]) {
     }
   }
   stop = rdtsc();
-  printf("result_ret ticks       = %llu = %llu - %llu status=%d v=%d ok=%lld\n",
+  printf("result_ret ticks       = %llu = %llu - %llu status=%d v=%d ok=%d\n",
       stop - start, stop, start, (int)rt.status, (int)rt.v, ok);
 
   return 0;

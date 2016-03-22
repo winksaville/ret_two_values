@@ -18,7 +18,16 @@ X = c
 STD = c11
 M = 64
 
+
+
 CFLAGS = -m${M} -Wall -std=${STD}
+
+# If 32bit compiler add req-sturct-return
+# this isn't needed for 64 as its the default
+# and clang complains.
+ifeq (${M},32)
+CFLAGS += -freg-struct-return
+endif
 
 all: test
 
