@@ -88,7 +88,7 @@ int main(int argc, char* argv[]) {
   v = 0;
   ok = 0;
   status = 0;
-  for (u64_t i = 0; i < loops; i++) {
+  for (u32_t i = 0; i < loops; i++) {
     status = status_ret(&v);
     if (status == 0) {
       ok += 1;
@@ -102,7 +102,7 @@ int main(int argc, char* argv[]) {
   ok = 0;
   status = 0;
   start = rdtsc();
-  for (u64_t i = 0; i < loops; i++) {
+  for (u32_t i = 0; i < loops; i++) {
     status = status_ret(&v);
     if (status == 0) {
       ok += 1;
