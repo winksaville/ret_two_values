@@ -33,7 +33,7 @@ all: test
 
 test.o: test.c
 	$(CC) -x $(X) -O$(O) $(CFLAGS) -o test.o -c test.c
-	objdump -d test.o > test.${CC}.txt
+	objdump -d test.o > test.${CC}-${M}.txt
 
 test: test.o
 	$(CC) $(CFLAGS) test.o -o test
@@ -42,7 +42,7 @@ run: test
 	./test ${loops}
 
 clean:
-	rm -f test test.o test.${CC}.txt
+	rm -f test test.o test.${CC}-${M}.txt
 
 cleanall:
-	rm -f test test.o test.gcc.txt test.clang.txt
+	rm -f test test.o test.*.txt
